@@ -1,25 +1,27 @@
 package com.fhd.firozhasan.lifecycle_awarecomponents
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import java.util.*
 
 class MainActivityViewModel : ViewModel() {
     private val TAG = this.javaClass.simpleName
-    private var myRandomNumber : String? = null
+    private var myRandomNumber : MutableLiveData<String>? = null
 
 
-    fun getNumber(): String? {
+    fun getNumber(): MutableLiveData<String>? {
         debug("+++++++++++++++++++++++++Get Number")
         if (myRandomNumber == null){
+            myRandomNumber = MutableLiveData()
             createNumber()
         }
         return myRandomNumber
     }
 
-    private fun createNumber() {
+    public fun createNumber() {
         debug("+++++++++++++++++++++++++Create new number")
         val random = Random()
-        myRandomNumber = "Number: " + (random.nextInt(10 - 1) + 1)
+        myRandomNumber?.value = "Number: " + (random.nextInt(10 - 1) + 1)
 
     }
 
