@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
         lifecycle.addObserver(MainActivityObserver())
     }
 
+    //
+
     override fun onStart() {
         super.onStart()
         debug("Owner ON_START")
