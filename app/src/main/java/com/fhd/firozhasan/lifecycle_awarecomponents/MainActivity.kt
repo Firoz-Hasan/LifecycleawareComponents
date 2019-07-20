@@ -3,6 +3,9 @@ package com.fhd.firozhasan.lifecycle_awarecomponents
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.arch.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     private val TAG = this.javaClass.simpleName
@@ -12,6 +15,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d(TAG, "Owner ON_CREATE")
         lifecycle.addObserver(MainActivityObserver())
+
+        val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        val myRandomNumber = model.number
+        mTextView.setText(myRandomNumber)
+
+        Log.d(TAG, "Random Number Set")
+
+
     }
 
     //
