@@ -20,27 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         val myRandomNumber = model.number
-
         // Observe the LiveData
-        myRandomNumber?.observe(this, object : Observer<String> {
-            override fun onChanged(t: String?) {
-                mTextView.text = t
-                Log.d(TAG, "Data Updated in UI")
-            }
+        myRandomNumber?.observe(this, Observer<String> { t ->
+            mTextView.text = t
+            Log.d(TAG, "Data Updated in UI")
         })
-
-       mButton?.setOnClickListener {
-           model?.createNumber()
-       }
-
-
+        mButton?.setOnClickListener {
+            model?.createNumber()
+        }
         Log.d(TAG, "Random Number Set")
-
-
     }
-
-    //
-
     override fun onStart() {
         super.onStart()
         debug("Owner ON_START")
